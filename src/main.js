@@ -6,24 +6,30 @@ import {createCardEditBlock} from "./components/card-edit.js";
 import {createCardBlock} from "./components/card.js";
 import {createLoadMoreBlock} from "./components/load-more.js";
 
-const mainElement = document.querySelector(`.main`);
-const mainControlElement = mainElement.querySelector(`.main__control`);
-
 const renderHtmlBlock = (block, elementToInsert) => {
   elementToInsert.insertAdjacentHTML(`beforeend`, block);
 };
 
-renderHtmlBlock(createMenuBlock(), mainControlElement);
-renderHtmlBlock(createSearchBlock(), mainElement);
-renderHtmlBlock(createFilterBlock(), mainElement);
-renderHtmlBlock(createBoardContainerBlock(), mainElement);
+const renderHtmlMainContainer = () => {
+  const mainElement = document.querySelector(`.main`);
+  const mainControlElement = mainElement.querySelector(`.main__control`);
 
-const boardElement = mainElement.querySelector(`.board`);
-const boardTasksElement = boardElement.querySelector(`.board__tasks`);
+  renderHtmlBlock(createMenuBlock(), mainControlElement);
+  renderHtmlBlock(createSearchBlock(), mainElement);
+  renderHtmlBlock(createFilterBlock(), mainElement);
+  renderHtmlBlock(createBoardContainerBlock(), mainElement);
+};
 
-renderHtmlBlock(createCardEditBlock(), boardTasksElement);
+const renderHtmlBoardContainer = () => {
+  const boardElement = document.querySelector(`.board`);
+  const boardTasksElement = boardElement.querySelector(`.board__tasks`);
 
-for (let i = 0; i < 3; i++) {
-  renderHtmlBlock(createCardBlock(), boardTasksElement);
-}
-renderHtmlBlock(createLoadMoreBlock(), boardElement);
+  renderHtmlBlock(createCardEditBlock(), boardTasksElement);
+  for (let i = 0; i < 3; i++) {
+    renderHtmlBlock(createCardBlock(), boardTasksElement);
+  }
+  renderHtmlBlock(createLoadMoreBlock(), boardElement);
+};
+
+renderHtmlMainContainer();
+renderHtmlBoardContainer();
