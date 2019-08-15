@@ -1,4 +1,9 @@
-export const createCardBlock = () => `<article class="card card--black">
+import {shuffle} from "../main.js";
+import {randomInteger} from "../main.js";
+
+export const createCardBlock = (task) => `<article class="card card--${
+  task.color
+}">
   <div class="card__form">
     <div class="card__inner">
       <div class="card__control">
@@ -23,7 +28,7 @@ export const createCardBlock = () => `<article class="card card--black">
       </div>
 
       <div class="card__textarea-wrap">
-        <p class="card__text">Example default task with default color.</p>
+        <p class="card__text">${task.description}</p>
       </div>
 
       <div class="card__settings">
@@ -31,31 +36,21 @@ export const createCardBlock = () => `<article class="card card--black">
           <div class="card__dates">
             <div class="card__date-deadline">
               <p class="card__input-deadline-wrap">
-                <span class="card__date">23 September</span>
-                <span class="card__time">11:15 PM</span>
+                <span class="card__date">${new Date(
+      task.dueDate
+  ).getDate()}.${new Date(task.dueDate).getMonth()}.${new Date(
+    task.dueDate
+).getFullYear()}</span>
+                <span class="card__time">${new Date(
+      task.dueDate
+  ).getHours()}:${new Date(task.dueDate).getMinutes()}</span>
               </p>
             </div>
           </div>
 
           <div class="card__hashtag">
             <div class="card__hashtag-list">
-              <span class="card__hashtag-inner">
-                <span class="card__hashtag-name">
-                  #todo
-                </span>
-              </span>
-
-              <span class="card__hashtag-inner">
-                <span class="card__hashtag-name">
-                  #personal
-                </span>
-              </span>
-
-              <span class="card__hashtag-inner">
-                <span class="card__hashtag-name">
-                  #important
-                </span>
-              </span>
+              ${createHashTagsElements(task)}
             </div>
           </div>
         </div>
@@ -63,3 +58,19 @@ export const createCardBlock = () => `<article class="card card--black">
     </div>
   </div>
 </article>`;
+
+const createHashTagsElements = (task) => {
+  const tagsShuffleTrim = shuffle([...task.tags]).slice(0, randomInteger(0, 3));
+  const tagsElements = tagsShuffleTrim
+    .map(
+        (it) =>
+          `<span class="card__hashtag-inner">
+    <span class="card__hashtag-name">
+      #${it}
+    </span>
+  </span>`
+    )
+    .join(``);
+
+  return tagsElements;
+};

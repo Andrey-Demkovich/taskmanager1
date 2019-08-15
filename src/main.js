@@ -5,10 +5,12 @@ import {createBoardContainerBlock} from "./components/board-container.js";
 import {createCardEditBlock} from "./components/card-edit.js";
 import {createCardBlock} from "./components/card.js";
 import {createLoadMoreBlock} from "./components/load-more.js";
+import {getTask} from "./components/data.js";
+export {shuffle} from "./components/utils.js";
+export {randomInteger} from "./components/utils.js";
 
-const renderHtmlBlock = (block, elementToInsert) => {
+const renderHtmlBlock = (block, elementToInsert) =>
   elementToInsert.insertAdjacentHTML(`beforeend`, block);
-};
 
 const renderHtmlMainContainer = () => {
   const mainElement = document.querySelector(`.main`);
@@ -26,7 +28,7 @@ const renderHtmlBoardContainer = () => {
 
   renderHtmlBlock(createCardEditBlock(), boardTasksElement);
   for (let i = 0; i < 3; i++) {
-    renderHtmlBlock(createCardBlock(), boardTasksElement);
+    renderHtmlBlock(createCardBlock(getTask()), boardTasksElement);
   }
   renderHtmlBlock(createLoadMoreBlock(), boardElement);
 };
