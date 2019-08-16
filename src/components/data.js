@@ -1,4 +1,5 @@
 import {randomInteger} from "../main.js";
+import {TOTAL_TASK} from "../main.js";
 
 export const getTask = () => ({
   description: [
@@ -23,6 +24,16 @@ export const getTask = () => ({
 
   tags: new Set([`homework`, `theory`, `practice`, `intensive`, `keks`]),
   color: [`black`, `yellow`, `blue`, `green`, `pink`][randomInteger(0, 4)],
-  isFavorite: true,
-  isArhive: true
+  isFavorite: !!randomInteger(0, 1),
+  isArhive: !!randomInteger(0, 1)
 });
+
+const MakeFilters = [
+  {title: `All`, count: TOTAL_TASK},
+  {title: `Overdue`, count: 1},
+  {title: `Todey`, count: 0},
+  {title: `Favorites`, count: 1},
+  {title: `Repeating`, count: 1},
+  {title: `Tags`, count: 1},
+  {title: `Arhive`, count: 115}
+];
