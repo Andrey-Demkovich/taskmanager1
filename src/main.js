@@ -27,9 +27,9 @@ const renderHtmlBoardContainer = () => {
   const boardElement = document.querySelector(`.board`);
   const boardTasksElement = boardElement.querySelector(`.board__tasks`);
 
-  renderHtmlBlock(createCardEditBlock(), boardTasksElement);
+  renderHtmlBlock(createCardEditBlock(tasksData[0]), boardTasksElement);
 
-  tasksData.forEach((task) => {
+  tasksData.slice(1).forEach((task) => {
     renderHtmlBlock(createCardBlock(task), boardTasksElement);
   });
 

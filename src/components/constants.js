@@ -1,1 +1,1 @@
-export const TOTAL_TASK = 6;
+export const TOTAL_TASK = 8;
