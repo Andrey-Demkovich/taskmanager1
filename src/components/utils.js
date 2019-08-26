@@ -10,6 +10,8 @@ export const shuffle = (arr) => {
 };
 
 // Случайное целое
-export const randomInteger = (min, max) => {
-  return Math.floor(min + Math.random() * (max + 1 - min));
-};
+export const getRandomInteger = (min, max) =>
+  Math.floor(min + Math.random() * (max + 1 - min));
+
+// Cлучайное булиево знычение
+export const getRandomBoolean = () => Boolean(getRandomInteger(0, 1));

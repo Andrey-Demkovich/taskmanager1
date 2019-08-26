@@ -1,6 +1,3 @@
-import {shuffle} from "../main.js";
-import {randomInteger} from "../main.js";
-
 export const createCardBlock = (task) => `<article class="card card--${
   task.color
 }">
@@ -50,7 +47,7 @@ export const createCardBlock = (task) => `<article class="card card--${
 
           <div class="card__hashtag">
             <div class="card__hashtag-list">
-              ${createHashTagsElements(task)}
+              ${createHashTagsElements(task.tags)}
             </div>
           </div>
         </div>
@@ -59,9 +56,8 @@ export const createCardBlock = (task) => `<article class="card card--${
   </div>
 </article>`;
 
-const createHashTagsElements = (task) => {
-  const tagsShuffleTrim = shuffle([...task.tags]).slice(0, randomInteger(0, 3));
-  const tagsElements = tagsShuffleTrim
+const createHashTagsElements = (tags) =>
+  tags
     .map(
         (it) =>
           `<span class="card__hashtag-inner">
@@ -71,6 +67,3 @@ const createHashTagsElements = (task) => {
   </span>`
     )
     .join(``);
-
-  return tagsElements;
-};
