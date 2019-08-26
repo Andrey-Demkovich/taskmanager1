@@ -1,6 +1,6 @@
 import {TOTAL_TASK} from "./components/constants.js";
 
-import {getTask, tasks} from "./components/data.js";
+import {tasksData, filtersData} from "./components/data.js";
 
 import {createControlBtnWrapBlock as createMenuBlock} from "./components/menu.js";
 import {createMainSearchBlock as createSearchBlock} from "./components/search.js";
@@ -19,7 +19,7 @@ const renderHtmlMainContainer = () => {
 
   renderHtmlBlock(createMenuBlock(), mainControlElement);
   renderHtmlBlock(createSearchBlock(), mainElement);
-  renderHtmlBlock(createFilterBlock(), mainElement);
+  renderHtmlBlock(createFilterBlock(filtersData), mainElement);
   renderHtmlBlock(createBoardContainerBlock(), mainElement);
 };
 
@@ -29,7 +29,7 @@ const renderHtmlBoardContainer = () => {
 
   renderHtmlBlock(createCardEditBlock(), boardTasksElement);
 
-  tasks.forEach((task) => {
+  tasksData.forEach((task) => {
     renderHtmlBlock(createCardBlock(task), boardTasksElement);
   });
 
