@@ -1,6 +1,6 @@
 export const createCardBlock = (task) => `<article class="card card--${
   task.color
-}">
+} ${Object.values(task.repeatingDays).some((it) => it) ? `card--repeat` : ``}">
   <div class="card__form">
     <div class="card__inner">
       <div class="card__control">

@@ -1,4 +1,4 @@
-import {TOTAL_TASK} from "./components/constants.js";
+import {STEP_TASK_SHOW} from "./components/constants.js";
 
 import {tasksData, filtersData} from "./components/data.js";
 
@@ -27,13 +27,31 @@ const renderHtmlBoardContainer = () => {
   const boardElement = document.querySelector(`.board`);
   const boardTasksElement = boardElement.querySelector(`.board__tasks`);
 
+  let countTaskShow = STEP_TASK_SHOW;
+
   renderHtmlBlock(createCardEditBlock(tasksData[0]), boardTasksElement);
 
-  tasksData.slice(1).forEach((task) => {
+  tasksData.slice(1, countTaskShow).forEach((task) => {
     renderHtmlBlock(createCardBlock(task), boardTasksElement);
   });
 
   renderHtmlBlock(createLoadMoreBlock(), boardElement);
+  const LoadMoreElement = document.querySelector(`.load-more`);
+
+  const onLoadMoreClick = () => {
+    tasksData
+      .slice(countTaskShow, (countTaskShow += STEP_TASK_SHOW))
+      .forEach((task) => {
+        renderHtmlBlock(createCardBlock(task), boardTasksElement);
+      });
+
+    if (countTaskShow >= tasksData.length) {
+      LoadMoreElement.style.display = `none`;
+      LoadMoreElement.removeEventListener(`click`, onLoadMoreClick);
+    }
+  };
+
+  LoadMoreElement.addEventListener(`click`, onLoadMoreClick);
 };
 
 renderHtmlMainContainer();

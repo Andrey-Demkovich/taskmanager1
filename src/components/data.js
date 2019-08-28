@@ -1,4 +1,4 @@
-import {TOTAL_TASK} from "./constants.js";
+import {TOTAL_TASK, MAX_TAG_SHOW} from "./constants.js";
 import {shuffle, getRandomInteger, getRandomBoolean} from "./utils.js";
 
 const generateTask = () => {
@@ -26,7 +26,7 @@ const generateTask = () => {
       Su: false
     },
 
-    tags: shuffle([...tags]).slice(0, getRandomInteger(0, 3)),
+    tags: shuffle([...tags]).slice(0, getRandomInteger(0, MAX_TAG_SHOW)),
     color: [`black`, `yellow`, `blue`, `green`, `pink`][getRandomInteger(0, 4)],
     isFavorite: getRandomBoolean(),
     isArhive: getRandomBoolean()
